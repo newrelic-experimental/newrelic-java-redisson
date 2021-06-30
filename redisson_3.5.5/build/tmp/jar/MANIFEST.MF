@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Implementation-Title: com.newrelic.instrumentation.redisson_3.5.5
+Implementation-Version: 1.0
+Implementation-Vendor-Id: com.newrelic.Labs
+Implementation-Vendor: New Relic Labs
+

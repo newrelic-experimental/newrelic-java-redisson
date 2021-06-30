@@ -1,0 +1,2 @@
+redisson_3.5.5 org.redisson:redisson:3.5.5
+redisson_3.5.5 org.redisson:redisson:3.5.6

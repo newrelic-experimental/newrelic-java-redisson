@@ -1,0 +1,10 @@
+org/redisson/command/CommandAsyncService.java
+ org.redisson.command.CommandAsyncService
+org/redisson/reactive/CommandReactiveService.java
+ org.redisson.reactive.CommandReactiveService
+com/nr/instrumentation/redisson/NRBiConsumer.java
+ com.nr.instrumentation.redisson.NRBiConsumer
+com/nr/instrumentation/redisson/NRFutureListener.java
+ com.nr.instrumentation.redisson.NRFutureListener
+com/nr/instrumentation/redisson/NRSupplierWrapper.java
+ com.nr.instrumentation.redisson.NRSupplierWrapper

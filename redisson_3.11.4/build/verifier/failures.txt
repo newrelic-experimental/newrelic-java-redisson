@@ -1,0 +1,5 @@
+redisson_3.11.4 org.redisson:redisson:3.15.5
+redisson_3.11.4 org.redisson:redisson:3.15.3
+redisson_3.11.4 org.redisson:redisson:3.15.2
+redisson_3.11.4 org.redisson:redisson:3.15.6
+redisson_3.11.4 org.redisson:redisson:3.15.4

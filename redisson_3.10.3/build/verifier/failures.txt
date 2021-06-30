@@ -1,0 +1,1 @@
+redisson_3.10.3 org.redisson:redisson:3.11.4

@@ -4,7 +4,16 @@ plugins {
 git {
     fetch 'https://github.com/newrelic/newrelic-java-agent.git', {
         dir "$rootDir/newrelic-agent/"
-        tag 'v6.0.0'
+        tag 'v6.4.0'
     }
 }
 rootProject.name = 'java-instrumentation-template'
+include 'redisson_3.5'
+include 'redisson_3.6'
+include 'redisson_3.8'
+include 'redisson_3.9'
+include 'redisson_3.10'
+include 'redisson_3.11.4'
+include 'redisson_3.5.5'
+include 'redisson_3.10.3'
+include 'redisson_3.15.2'
