@@ -1,54 +1,75 @@
 [![New Relic Experimental header](https://github.com/newrelic/opensource-website/raw/master/src/images/categories/Experimental.png)](https://opensource.newrelic.com/oss-category/#new-relic-experimental)
 
-# [Project Name - use format "newrelic-java-<name>"] [build badges go here when available]
+# New Relic Java Instrumentation for Redisson Redis Driver
 
->[Brief description - what is the project and value does it provide? How often should users expect to get releases? How is versioning set up? Where does this project want to go?]
+> Provides instrumentation code for monitoring the Redisson Redis Driver.  Calls to Redis using Redisson will be created under Databases.
+> 
+> 
+
 
 ## Installation
 
-> [Include a step-by-step procedure on how to get your code installed. Be sure to include any third-party dependencies that need to be installed separately]
+> Clone this repository to your local disk or follow instructions for installing the latest release.
 
 ## Getting Started
+> Install Gradle if needed.
+> 
+> Project can be imported into Eclipse or IntelliJ
+>
+> Eclipse:
+> All modules
+> gradle eclipse
+>
+> Individual Module
+> gradle moduleName:eclipse
+> e.g. gradle redisson-3.5:eclipse
+>
+> IntelliJ
+> same command except use idea rather than eclipse
 
->[Simple steps to start working with the software similar to a "Hello World"]
 
 ## Usage
+   
+The calls will show up under Databases as Redisson *Redisson_Type* *method*.  
+   
+![image](https://user-images.githubusercontent.com/8822859/124296144-40a5aa00-db1f-11eb-8030-f1be6c98131a.png)
+   
+The name of the Redisson object is not captured as part of the query name in Databases as it can lead to metric name explosion.   The name is captured in a distributed trace span as an attribute.  It will be captured as Redisson_Object_Name.    
+    
+![image](https://user-images.githubusercontent.com/8822859/124296773-f40e9e80-db1f-11eb-8934-8d07cb977172.png)
 
->[**Optional** - Include more thorough instructions on how to use the software. This section might not be needed if the Getting Started section is enough. Remove this section if it's not needed.]
+
 
 ## Building
 
->[**Optional** - Include this section if users will need to follow specific instructions to build the software from source. Be sure to include any third party build dependencies that need to be installed separately. Remove this section if it's not needed.]
+> Set the environment variable NEW_RELIC_EXTENSIONS_DIR to the directory where you would like to build the extension jar(s)
+>
+> To build all modules
+> gradle clean install
+>
+> To build a modules
+> gradle moduleName:clean moduleName:install
 
 ## Testing
 
->[**Optional** - Include instructions on how to run tests if we include tests with the codebase. Remove this section if it's not needed.]
+> Run gradle moduleName:test
+
+## Verifying
+
+> To verify that the module will load into the Java Agent used the verifyInstrumentation option
+> see https://github.com/newrelic/newrelic-gradle-verify-instrumentation for more information.  
+> gradle moduleName:verifyInstrumentation
 
 ## Support
 
-New Relic has open-sourced this project. This project is provided AS-IS WITHOUT WARRANTY OR DEDICATED SUPPORT. Issues and contributions should be reported to the project here on GitHub.
+New Relic hosts and moderates an online forum where customers can interact with New Relic employees as well as other customers to get help and share best practices. Like all official New Relic open source projects, there's a related Community topic in the New Relic Explorers Hub. You can find this project's topic/threads here:
 
->[Choose 1 of the 2 options below for Support details, and remove the other one.]
-
->[Option 1 - no specific thread in Community]
->We encourage you to bring your experiences and questions to the [Explorers Hub](https://discuss.newrelic.com) where our community members collaborate on solutions and new ideas.
-
->[Option 2 - thread in Community]
->New Relic hosts and moderates an online forum where customers can interact with New Relic employees as well as other customers to get help and share best practices. Like all official New Relic open source projects, there's a related Community topic in the New Relic Explorers Hub.
->You can find this project's topic/threads here: [URL for Community thread]
+>Add the url for the support thread here
 
 ## Contributing
-
-We encourage your contributions to improve [Project Name]! Keep in mind when you submit your pull request, you'll need to sign the CLA via the click-through using CLA-Assistant. You only have to sign the CLA one time per project. If you have any questions, or to execute our corporate CLA, required if your contribution is on behalf of a company, please drop us an email at opensource@newrelic.com.
-
-**A note about vulnerabilities**
-
-As noted in our [security policy](../../security/policy), New Relic is committed to the privacy and security of our customers and their data. We believe that providing coordinated disclosure by security researchers and engaging with the security community are important means to achieve our security goals.
-
-If you believe you have found a security vulnerability in this project or any of New Relic's products or websites, we welcome and greatly appreciate you reporting it to New Relic through [HackerOne](https://hackerone.com/newrelic).
+We encourage your contributions to improve [project name]! Keep in mind when you submit your pull request, you'll need to sign the CLA via the click-through using CLA-Assistant. You only have to sign the CLA one time per project.
+If you have any questions, or to execute our corporate CLA, required if your contribution is on behalf of a company,  please drop us an email at opensource@newrelic.com.
 
 ## License
-
 [Project Name] is licensed under the [Apache 2.0](http://apache.org/licenses/LICENSE-2.0.txt) License.
-
->[If applicable: [Project Name] also uses source code from third-party libraries. You can find full details on which libraries are used and the terms under which they are licensed in the third-party notices document.]
+>[If applicable: The [project name] also uses source code from third-party libraries. You can find full details on which libraries are used and the terms under which they are licensed in the third-party notices document.]
