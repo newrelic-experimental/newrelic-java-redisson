@@ -1,12 +1,9 @@
 redisson_3.10 org.redisson:redisson:3.10.0
 redisson_3.10 org.redisson:redisson:3.10.1
 redisson_3.10 org.redisson:redisson:3.10.2
-redisson_3.10 org.redisson:redisson:3.10.0
 redisson_3.10 org.redisson:redisson:3.10.1
+redisson_3.10 org.redisson:redisson:3.10.2
 redisson_3.10 org.redisson:redisson:3.10.0
 redisson_3.10 org.redisson:redisson:3.10.2
 redisson_3.10 org.redisson:redisson:3.10.0
 redisson_3.10 org.redisson:redisson:3.10.1
-redisson_3.10 org.redisson:redisson:3.10.1
-redisson_3.10 org.redisson:redisson:3.10.0
-redisson_3.10 org.redisson:redisson:3.10.2

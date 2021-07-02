@@ -1,3 +1,0 @@
-com/nr/instrumentation/redisson/RedissonTestClient.java
- com.nr.instrumentation.redisson.RedissonTestClient
- com.nr.instrumentation.redisson.RedissonTestClient$1

@@ -3,7 +3,7 @@
 // Global defaults - override here or in individual modules as needed.
 project.ext {
   group = 'com.newrelic.instrumentation'
-  javaAgentVersion = '6.0.0'
+  javaAgentVersion = '6.4.0'
 
   // Aligned with minimum Java major version supported by latest Java Agent
   javaVersion = JavaVersion.VERSION_1_8
@@ -135,7 +135,7 @@ subprojects {
   targetCompatibility = project.javaVersion
 
   dependencies {
-    testImplementation  fileTree(dir: '../lib', include: "*.jar") // + project.javaAgentVersion
+    testImplementation group: 'junit', name: 'junit', version: '4.11'
     testImplementation 'org.nanohttpd:nanohttpd:2.3.1'
     testImplementation 'com.newrelic.agent.java:newrelic-agent:' + project.javaAgentVersion
   }

@@ -1,12 +1,116 @@
-com/nr/instrumentation/redisson/NRSupplierWrapper.java
- com.nr.instrumentation.redisson.NRSupplierWrapper
-org/redisson/command/CommandReactiveService.java
- org.redisson.command.CommandReactiveService
-com/nr/instrumentation/redisson/NRBiConsumer.java
- com.nr.instrumentation.redisson.NRBiConsumer
-com/nr/instrumentation/redisson/NRFutureListener.java
- com.nr.instrumentation.redisson.NRFutureListener
 org/redisson/command/CommandAsyncService.java
  org.redisson.command.CommandAsyncService
+org/redisson/RedissonSubList.java
+ org.redisson.RedissonSubList
+com/nr/instrumentation/redisson/Utils.java
+ com.nr.instrumentation.redisson.Utils
+com/nr/instrumentation/redisson/NRFutureListener.java
+ com.nr.instrumentation.redisson.NRFutureListener
+org/redisson/RedissonSetMultimap.java
+ org.redisson.RedissonSetMultimap
+org/redisson/Redisson_instrumentation.java
+ org.redisson.Redisson_instrumentation
+org/redisson/RedissonSemaphore.java
+ org.redisson.RedissonSemaphore
+org/redisson/RedissonPermitExpirableSemaphore.java
+ org.redisson.RedissonPermitExpirableSemaphore
+org/redisson/reactive/RedissonScoredSortedSetReactive.java
+ org.redisson.reactive.RedissonScoredSortedSetReactive
 org/redisson/RedissonObject.java
  org.redisson.RedissonObject
+org/redisson/reactive/RedissonTopicReactive.java
+ org.redisson.reactive.RedissonTopicReactive
+org/redisson/RedissonSetCache.java
+ org.redisson.RedissonSetCache
+org/redisson/RedissonQueue.java
+ org.redisson.RedissonQueue
+org/redisson/RedissonGeo.java
+ org.redisson.RedissonGeo
+org/redisson/RedissonSet.java
+ org.redisson.RedissonSet
+org/redisson/RedissonSetMultimapCache.java
+ org.redisson.RedissonSetMultimapCache
+org/redisson/RedissonPriorityQueue.java
+ org.redisson.RedissonPriorityQueue
+org/redisson/reactive/RedissonBlockingQueueReactive.java
+ org.redisson.reactive.RedissonBlockingQueueReactive
+org/redisson/RedissonQueueSemaphore.java
+ org.redisson.RedissonQueueSemaphore
+org/redisson/reactive/RedissonSetCacheReactive.java
+ org.redisson.reactive.RedissonSetCacheReactive
+org/redisson/RedissonScoredSortedSet.java
+ org.redisson.RedissonScoredSortedSet
+org/redisson/RedissonBlockingDeque.java
+ org.redisson.RedissonBlockingDeque
+org/redisson/RedissonDelayedQueue.java
+ org.redisson.RedissonDelayedQueue
+org/redisson/reactive/RedissonObjectReactive.java
+ org.redisson.reactive.RedissonObjectReactive
+org/redisson/RedissonHyperLogLog.java
+ org.redisson.RedissonHyperLogLog
+org/redisson/reactive/RedissonDequeReactive.java
+ org.redisson.reactive.RedissonDequeReactive
+org/redisson/RedissonListMultimapValues.java
+ org.redisson.RedissonListMultimapValues
+org/redisson/reactive/RedissonQueueReactive.java
+ org.redisson.reactive.RedissonQueueReactive
+org/redisson/RedissonMultimap.java
+ org.redisson.RedissonMultimap
+org/redisson/RedissonListMultimapCache.java
+ org.redisson.RedissonListMultimapCache
+org/redisson/reactive/RedissonLexSortedSetReactive.java
+ org.redisson.reactive.RedissonLexSortedSetReactive
+org/redisson/reactive/RedissonAtomicLongReactive.java
+ org.redisson.reactive.RedissonAtomicLongReactive
+org/redisson/RedissonBitSet.java
+ org.redisson.RedissonBitSet
+org/redisson/reactive/RedissonBitSetReactive.java
+ org.redisson.reactive.RedissonBitSetReactive
+org/redisson/RedissonMap.java
+ org.redisson.RedissonMap
+org/redisson/RedissonLexSortedSet.java
+ org.redisson.RedissonLexSortedSet
+org/redisson/reactive/RedissonBucketReactive.java
+ org.redisson.reactive.RedissonBucketReactive
+org/redisson/RedissonAtomicLong.java
+ org.redisson.RedissonAtomicLong
+org/redisson/RedissonSetMultimapValues.java
+ org.redisson.RedissonSetMultimapValues
+org/redisson/RedissonBlockingQueue.java
+ org.redisson.RedissonBlockingQueue
+org/redisson/reactive/RedissonSemaphoreReactive.java
+ org.redisson.reactive.RedissonSemaphoreReactive
+org/redisson/reactive/RedissonSetReactive.java
+ org.redisson.reactive.RedissonSetReactive
+org/redisson/RedissonBuckets.java
+ org.redisson.RedissonBuckets
+org/redisson/RedissonSubSortedSet.java
+ org.redisson.RedissonSubSortedSet
+org/redisson/RedissonListMultimap.java
+ org.redisson.RedissonListMultimap
+org/redisson/RedissonBucket.java
+ org.redisson.RedissonBucket
+org/redisson/RedissonAtomicDouble.java
+ org.redisson.RedissonAtomicDouble
+org/redisson/RedissonMapCache.java
+ org.redisson.RedissonMapCache
+org/redisson/RedissonPriorityDeque.java
+ org.redisson.RedissonPriorityDeque
+org/redisson/RedissonLocalCachedMap.java
+ org.redisson.RedissonLocalCachedMap
+org/redisson/RedissonDeque.java
+ org.redisson.RedissonDeque
+org/redisson/RedissonSortedSet.java
+ org.redisson.RedissonSortedSet
+org/redisson/RedissonTopic.java
+ org.redisson.RedissonTopic
+org/redisson/reactive/RedissonListReactive.java
+ org.redisson.reactive.RedissonListReactive
+org/redisson/reactive/RedissonMapCacheReactive.java
+ org.redisson.reactive.RedissonMapCacheReactive
+org/redisson/RedissonList.java
+ org.redisson.RedissonList
+org/redisson/reactive/RedissonMapReactive.java
+ org.redisson.reactive.RedissonMapReactive
+org/redisson/reactive/RedissonHyperLogLogReactive.java
+ org.redisson.reactive.RedissonHyperLogLogReactive
