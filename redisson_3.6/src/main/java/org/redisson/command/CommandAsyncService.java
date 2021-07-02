@@ -1,17 +1,14 @@
 package org.redisson.command;
 
-import java.util.Collection;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import org.redisson.SlotCallback;
 import org.redisson.api.RFuture;
 import org.redisson.client.RedisException;
 import org.redisson.client.codec.Codec;
 import org.redisson.client.protocol.RedisCommand;
 import org.redisson.connection.ConnectionManager;
-import org.redisson.connection.MasterSlaveEntry;
 import org.redisson.connection.NodeSource;
+import org.redisson.misc.RPromise;
 import org.redisson.misc.RedissonPromise;
 
 import com.newrelic.api.agent.DatastoreParameters;
@@ -23,17 +20,18 @@ import com.newrelic.api.agent.weaver.NewField;
 import com.newrelic.api.agent.weaver.Weave;
 import com.newrelic.api.agent.weaver.Weaver;
 import com.nr.instrumentation.redisson.NRFutureListener;
+import com.nr.instrumentation.redisson.Utils;
 
 @Weave(type=MatchType.BaseClass)
-public abstract class CommandAsyncService {
+public abstract class CommandAsyncService implements CommandAsyncExecutor {
 
 	@NewField
 	public String objectType = null;
-	
+
 	public CommandAsyncService(ConnectionManager connectionManager) {
-		
+
 	}
-	
+
 
 	public <V> RedisException convertException(RFuture<V> RFuture) {
 		RedisException e = Weaver.callOriginal();
@@ -50,198 +48,36 @@ public abstract class CommandAsyncService {
 	}
 
 	@Trace(excludeFromTransactionTrace=true)
-	public <T, R> RFuture<R> writeAsync(MasterSlaveEntry entry, Codec codec, RedisCommand<T> command, Object ... params) {
-		String cmdName = command.getName();
+	protected <V, R> void async(boolean readOnlyMode, NodeSource source, Codec codec, RedisCommand<V> command, Object[] params, RPromise<R> mainPromise, int attempt, boolean ignoreRedirect) {
+		String operationName = Utils.getOperation();
+		
+		String cmdName = operationName != null ? operationName : command.getName();
 		if(cmdName == null || cmdName.isEmpty()) {
 			cmdName = "UnknownCommandName";
 		}
-		
+
 		String subName = command.getSubName();
-		RFuture<R> result = Weaver.callOriginal();
-		if(result instanceof RedissonPromise) {
-			String collectionName = objectType != null ? objectType : "?";
+		
+		String oName = Utils.getObjectName();
+		
+		if(mainPromise instanceof RedissonPromise) {
+			
+			String collectionName = Utils.typeSet() ? Utils.getType() : objectType != null ? objectType : "?";
 			Segment segment = NewRelic.getAgent().getTransaction().startSegment(cmdName + "-" + collectionName);
 			segment.addCustomAttribute("Command", cmdName);
 			if(subName != null) {
 				segment.addCustomAttribute("Sub", subName);
 			}
+			if(oName != null && !oName.isEmpty()) segment.addCustomAttribute("Redisson Object Name", oName);
 			DatastoreParameters dsParams = DatastoreParameters.product("Redisson").collection(collectionName).operation(cmdName).build();
-			RedissonPromise<R> promise = (RedissonPromise<R>)result;
+			RedissonPromise<R> promise = (RedissonPromise<R>)mainPromise;
 			NRFutureListener<R> listener = new NRFutureListener<R>(segment, dsParams);
 			promise.addListener(listener);
 		}
-		return result;
+		Weaver.callOriginal();
+		Utils.unSetOperation();
+		Utils.unSetType();
+		Utils.unSetObjectName();
 	}
-
-
-	@Trace(excludeFromTransactionTrace=true)
-	public <T, R> RFuture<R> evalWriteAllAsync(RedisCommand<T> command, SlotCallback<T, R> callback, String script, List<Object> keys, Object ... params) {
-		String cmdName = command.getName();
-		if(cmdName == null || cmdName.isEmpty()) {
-			cmdName = "UnknownCommandName";
-		}
-		
-		String subName = command.getSubName();
-		RFuture<R> result = Weaver.callOriginal();
-		if(result instanceof RedissonPromise) {
-			String collectionName = objectType != null ? objectType : "?";
-			Segment segment = NewRelic.getAgent().getTransaction().startSegment(cmdName + "-" + collectionName);
-			segment.addCustomAttribute("Command", cmdName);
-			if(subName != null) {
-				segment.addCustomAttribute("Sub", subName);
-			}
-			DatastoreParameters dsParams = DatastoreParameters.product("Redisson").collection(collectionName).operation(cmdName).build();
-			RedissonPromise<R> promise = (RedissonPromise<R>)result;
-			NRFutureListener<R> listener = new NRFutureListener<R>(segment, dsParams);
-			promise.addListener(listener);
-		}
-		return result;
-	}
-
-	@Trace(excludeFromTransactionTrace=true)
-	public <T, R> RFuture<R> readAsync(String key, Codec codec, RedisCommand<T> command, Object ... params) {
-		String cmdName = command.getName();
-		if(cmdName == null || cmdName.isEmpty()) {
-			cmdName = "UnknownCommandName";
-		}
-		
-		String subName = command.getSubName();
-		RFuture<R> result = Weaver.callOriginal();
-		if(result instanceof RedissonPromise) {
-			String collectionName = objectType != null ? objectType : "?";
-			Segment segment = NewRelic.getAgent().getTransaction().startSegment(cmdName + "-" + collectionName);
-			segment.addCustomAttribute("Command", cmdName);
-			if(subName != null) {
-				segment.addCustomAttribute("Sub", subName);
-			}
-			DatastoreParameters dsParams = DatastoreParameters.product("Redisson").collection(collectionName).operation(cmdName).build();
-			RedissonPromise<R> promise = (RedissonPromise<R>)result;
-			NRFutureListener<R> listener = new NRFutureListener<R>(segment, dsParams);
-			promise.addListener(listener);
-		}
-		return result;
-	}
-
-	@Trace(excludeFromTransactionTrace=true)
-	public <T, R> RFuture<R> writeAsync(String key, Codec codec, RedisCommand<T> command, Object ... params) {
-		String cmdName = command.getName();
-		if(cmdName == null || cmdName.isEmpty()) {
-			cmdName = "UnknownCommandName";
-		}
-		
-		String subName = command.getSubName();
-		RFuture<R> result = Weaver.callOriginal();
-		if(result instanceof RedissonPromise) {
-			String collectionName = objectType != null ? objectType : "?";
-			Segment segment = NewRelic.getAgent().getTransaction().startSegment(cmdName + "-" + collectionName);
-			segment.addCustomAttribute("Command", cmdName);
-			if(subName != null) {
-				segment.addCustomAttribute("Sub", subName);
-			}
-			DatastoreParameters dsParams = DatastoreParameters.product("Redisson").collection(collectionName).operation(cmdName).build();
-			RedissonPromise<R> promise = (RedissonPromise<R>)result;
-			NRFutureListener<R> listener = new NRFutureListener<R>(segment, dsParams);
-			promise.addListener(listener);
-		}
-		return result;
-	}
-
-	@Trace(excludeFromTransactionTrace=true)
-	public <T, R> RFuture<Collection<R>> readAllAsync(RedisCommand<T> command, Object ... params) {
-		String cmdName = command.getName();
-		if(cmdName == null || cmdName.isEmpty()) {
-			cmdName = "UnknownCommandName";
-		}
-		
-		String subName = command.getSubName();
-		RFuture<Collection<R>> result = Weaver.callOriginal();
-		if(result instanceof RedissonPromise) {
-			String collectionName = objectType != null ? objectType : "?";
-			Segment segment = NewRelic.getAgent().getTransaction().startSegment(cmdName + "-" + collectionName);
-			segment.addCustomAttribute("Command", cmdName);
-			if(subName != null) {
-				segment.addCustomAttribute("Sub", subName);
-			}
-			DatastoreParameters dsParams = DatastoreParameters.product("Redisson").collection(collectionName).operation(cmdName).build();
-			RedissonPromise<Collection<R>> promise = (RedissonPromise<Collection<R>>)result;
-			NRFutureListener<Collection<R>> listener = new NRFutureListener<Collection<R>>(segment, dsParams);
-			promise.addListener(listener);
-		}
-		return result;
-	}
-
-	@Trace(excludeFromTransactionTrace=true)
-	public <T, R> RFuture<R> readRandomAsync(RedisCommand<T> command, Object ... params) {
-		String cmdName = command.getName();
-		if(cmdName == null || cmdName.isEmpty()) {
-			cmdName = "UnknownCommandName";
-		}
-		
-		String subName = command.getSubName();
-		RFuture<R> result = Weaver.callOriginal();
-		if(result instanceof RedissonPromise) {
-			String collectionName = objectType != null ? objectType : "?";
-			Segment segment = NewRelic.getAgent().getTransaction().startSegment(cmdName + "-" + collectionName);
-			segment.addCustomAttribute("Command", cmdName);
-			if(subName != null) {
-				segment.addCustomAttribute("Sub", subName);
-			}
-			DatastoreParameters dsParams = DatastoreParameters.product("Redisson").collection(collectionName).operation(cmdName).build();
-			RedissonPromise<R> promise = (RedissonPromise<R>)result;
-			NRFutureListener<R> listener = new NRFutureListener<R>(segment, dsParams);
-			promise.addListener(listener);
-		}
-		return result;
-	}
-
-
-	@Trace(excludeFromTransactionTrace=true)
-	private <T, R> RFuture<R> allAsync(boolean readOnlyMode, RedisCommand<T> command, final SlotCallback<T, R> callback, Object... params) {
-		String cmdName = command.getName();
-		if(cmdName == null || cmdName.isEmpty()) {
-			cmdName = "UnknownCommandName";
-		}
-		
-		String subName = command.getSubName();
-		RFuture<R> result = Weaver.callOriginal();
-		if(result instanceof RedissonPromise) {
-			String collectionName = objectType != null ? objectType : "?";
-			Segment segment = NewRelic.getAgent().getTransaction().startSegment(cmdName + "-" + collectionName);
-			segment.addCustomAttribute("Command", cmdName);
-			if(subName != null) {
-				segment.addCustomAttribute("Sub", subName);
-			}
-			DatastoreParameters dsParams = DatastoreParameters.product("Redisson").collection(collectionName).operation(cmdName).build();
-			RedissonPromise<R> promise = (RedissonPromise<R>)result;
-			NRFutureListener<R> listener = new NRFutureListener<R>(segment, dsParams);
-			promise.addListener(listener);
-		}
-		return result;
-	}
-
-	@Trace(excludeFromTransactionTrace=true)
-	private <T, R> RFuture<R> evalAsync(NodeSource nodeSource, boolean readOnlyMode, Codec codec, RedisCommand<T> evalCommandType, String script, List<Object> keys, Object... params) {
-		String cmdName = evalCommandType.getName();
-		if(cmdName == null || cmdName.isEmpty()) {
-			cmdName = "UnknownCommandName";
-		}
-		
-		String subName = evalCommandType.getSubName();
-		RFuture<R> result = Weaver.callOriginal();
-		if(result instanceof RedissonPromise) {
-			String collectionName = objectType != null ? objectType : "?";
-			Segment segment = NewRelic.getAgent().getTransaction().startSegment(cmdName + "-" + collectionName);
-			segment.addCustomAttribute("Command", cmdName);
-			if(subName != null) {
-				segment.addCustomAttribute("Sub", subName);
-			}
-			DatastoreParameters dsParams = DatastoreParameters.product("Redisson").collection(collectionName).operation(cmdName).build();
-			RedissonPromise<R> promise = (RedissonPromise<R>)result;
-			NRFutureListener<R> listener = new NRFutureListener<R>(segment, dsParams);
-			promise.addListener(listener);
-		}
-		return result;
-	}
-	
 
 }

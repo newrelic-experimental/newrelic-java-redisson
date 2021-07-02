@@ -22,5 +22,5 @@ jar {
 }
 
 verifyInstrumentation {
-    passes 'org.redisson:redisson:[3.5.7,3.7.5]'
+    passes 'org.redisson:redisson:[3.6.0,3.7.1)'
 }
