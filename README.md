@@ -17,11 +17,11 @@ Project can be imported into Eclipse or IntelliJ
 
 Eclipse:
  All modules
- gradle eclipse
+ ./gradlew eclipse
 
 Individual Module
- gradle moduleName:eclipse
- e.g. gradle redisson-3.5:eclipse
+ ./gradlew moduleName:eclipse
+ e.g. ./gradlew redisson-3.5:eclipse
 
  IntelliJ
  same command except use idea rather than eclipse
