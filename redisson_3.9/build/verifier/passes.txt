@@ -1,2 +1,0 @@
-redisson_3.9 org.redisson:redisson:3.9.1
-redisson_3.9 org.redisson:redisson:3.9.0
