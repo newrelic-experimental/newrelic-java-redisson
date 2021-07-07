@@ -1,3 +1,7 @@
 .java-version
 .github
 .git
+.classpath
+build
+bin
+.settings
