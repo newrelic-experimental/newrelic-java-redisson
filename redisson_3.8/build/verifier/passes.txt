@@ -1,1 +1,0 @@
-redisson_3.8 org.redisson:redisson:3.8.1
