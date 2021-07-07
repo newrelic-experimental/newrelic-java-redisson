@@ -12,20 +12,19 @@
 > Clone this repository to your local disk or follow instructions for installing the latest release.
 
 ## Getting Started
-> Install Gradle if needed.
-> 
-> Project can be imported into Eclipse or IntelliJ
->
-> Eclipse:
-> All modules
-> gradle eclipse
->
-> Individual Module
-> gradle moduleName:eclipse
-> e.g. gradle redisson-3.5:eclipse
->
-> IntelliJ
-> same command except use idea rather than eclipse
+
+Project can be imported into Eclipse or IntelliJ
+
+Eclipse:
+ All modules
+ gradle eclipse
+
+Individual Module
+ gradle moduleName:eclipse
+ e.g. gradle redisson-3.5:eclipse
+
+ IntelliJ
+ same command except use idea rather than eclipse
 
 
 ## Usage
@@ -45,10 +44,10 @@ The name of the Redisson object is not captured as part of the query name in Dat
 > Set the environment variable NEW_RELIC_EXTENSIONS_DIR to the directory where you would like to build the extension jar(s)
 >
 > To build all modules
-> gradle clean install
+> ./gradlew clean install
 >
 > To build a modules
-> gradle moduleName:clean moduleName:install
+> ./gradlew moduleName:clean moduleName:install
 
 ## Testing
 
@@ -64,7 +63,7 @@ The name of the Redisson object is not captured as part of the query name in Dat
 
 New Relic hosts and moderates an online forum where customers can interact with New Relic employees as well as other customers to get help and share best practices. Like all official New Relic open source projects, there's a related Community topic in the New Relic Explorers Hub. You can find this project's topic/threads here:
 
->Add the url for the support thread here
+
 
 ## Contributing
 We encourage your contributions to improve [project name]! Keep in mind when you submit your pull request, you'll need to sign the CLA via the click-through using CLA-Assistant. You only have to sign the CLA one time per project.
