@@ -1,7 +1,9 @@
 .java-version
 .github
+.gradle
 .git
 .classpath
 build
 bin
 .settings
+.project
