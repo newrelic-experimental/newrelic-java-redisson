@@ -78,6 +78,9 @@ public class RedissonTestClient {
 	
 	@AfterClass
 	public static void afterClass() {
+		if(redisServer != null) {
+			redisServer.stop();
+		}
 	}
 	
 	@Test
