@@ -3,9 +3,12 @@ package com.nr.instrumentation.redisson;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collection;
 //import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.AfterClass;
@@ -28,6 +31,8 @@ import com.newrelic.agent.introspec.TracedMetricData;
 import com.newrelic.api.agent.Trace;
 
 import reactor.core.publisher.Mono;
+import redis.embedded.RedisServer;
+import redis.embedded.exceptions.EmbeddedRedisException;
 
 
 @RunWith(InstrumentationTestRunner.class)
@@ -35,15 +40,59 @@ import reactor.core.publisher.Mono;
 public class RedissonTestClient {
 
 	static RedissonClient client = null;
-	static RedissonReactiveClient reactive = Redisson.createReactive();
+	static RedissonReactiveClient reactive = null;
+	protected static RedisServer redisServer = null;
 	
 	@BeforeClass
-	public static void beforeClass() {
+	public static void beforeClass()  {
+		InputStream stream = RedissonTestClient.class.getResourceAsStream("/redis.properties");
+		if (stream != null) {
+			System.out.println("Opened inputstream to redis.properties");
+		} else {
+			System.out.println("Failed to open inputstream to redis.properties");
+		}
+		Properties properties = new Properties();
+		if (stream != null) {
+			try {
+				properties.load(stream);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		boolean useEmbedded = Boolean.parseBoolean(properties.getProperty("redis-server-embedded", "true"));
+		System.out.println("useEmbedded: "+useEmbedded);
+
+		String host = properties.getProperty("redis-server-host", "localhost");
+		int port = Integer.parseInt(properties.getProperty("redis-server-port", "6379"));
+
+		if (useEmbedded) {
+			try {
+				redisServer = new RedisServer(port);
+				redisServer.start();
+				System.out.println("Embedded Redis Server started on port " + port);
+			} catch (EmbeddedRedisException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			System.out.println("Will use external Redis server on " + host + " and port " + port);
+		}
+		try {
+			Thread.sleep(5000L);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		client = Redisson.create();
+		reactive = Redisson.createReactive();
 	}
 	
 	@AfterClass
 	public static void afterClass() {
+		if(redisServer != null) {
+			redisServer.stop();
+		}
 	}
 	
 	@Test
