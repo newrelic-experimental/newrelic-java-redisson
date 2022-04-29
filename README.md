@@ -1,5 +1,21 @@
 [![New Relic Experimental header](https://github.com/newrelic/opensource-website/raw/master/src/images/categories/Experimental.png)](https://opensource.newrelic.com/oss-category/#new-relic-experimental)
+   
+ ![GitHub forks](https://img.shields.io/github/forks/newrelic-experimental/newrelic-java-redisson?style=social)
+![GitHub stars](https://img.shields.io/github/stars/newrelic-experimental/newrelic-java-redisson?style=social)
+![GitHub watchers](https://img.shields.io/github/watchers/newrelic-experimental/newrelic-java-redisson?style=social)
 
+![GitHub all releases](https://img.shields.io/github/downloads/newrelic-experimental/newrelic-java-redisson/total)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/newrelic-experimental/newrelic-java-redisson)
+![GitHub last commit](https://img.shields.io/github/last-commit/newrelic-experimental/newrelic-java-redisson)
+![GitHub Release Date](https://img.shields.io/github/release-date/newrelic-experimental/newrelic-java-redisson)
+
+
+![GitHub issues](https://img.shields.io/github/issues/newrelic-experimental/newrelic-java-redisson)
+![GitHub issues closed](https://img.shields.io/github/issues-closed/newrelic-experimental/newrelic-java-redisson)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/newrelic-experimental/newrelic-java-redisson)
+![GitHub pull requests closed](https://img.shields.io/github/issues-pr-closed/newrelic-experimental/newrelic-java-redisson) 
+   
+   
 # New Relic Java Instrumentation for Redisson Redis Driver
 
 > Provides instrumentation code for monitoring the Redisson Redis Driver.  Calls to Redis using Redisson will be created under Databases.
