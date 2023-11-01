@@ -1,3 +1,7 @@
+## Version: [v2.1.1](https://github.com/newrelic-experimental/newrelic-java-redisson/releases/tag/v2.1.1) | Created: 2023-11-01
+### Bug Fixes
+- Added support for version 3.24 and above
+
 ## Version: [v2.1.0](https://github.com/newrelic-experimental/newrelic-java-redisson/releases/tag/v2.1.0) | Created: 2023-08-01
 ### Features
 - Added Support for redisson 3.23
