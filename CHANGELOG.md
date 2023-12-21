@@ -1,3 +1,9 @@
+## Version: [v2.1.2](https://github.com/newrelic-experimental/newrelic-java-redisson/releases/tag/v2.1.2) | Created: 2023-12-21
+### Bug Fixes
+- Ixes to work with Reddison v3.25
+- Ixes to work with Reddison v3.25
+- Erge pull request #10 from newrelic-experimental/fix-3.25
+
 ## Version: [v2.1.1](https://github.com/newrelic-experimental/newrelic-java-redisson/releases/tag/v2.1.1) | Created: 2023-11-01
 ### Bug Fixes
 - Added support for version 3.24 and above
