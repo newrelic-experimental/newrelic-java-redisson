@@ -29,6 +29,6 @@ jar {
 }
 
 verifyInstrumentation {
-   passes 'org.redisson:redisson:[3.23.4,)'
+   passes 'org.redisson:redisson:[3.23.4,3.25.0)'
     excludeRegex '.*-NR.*'
 }
