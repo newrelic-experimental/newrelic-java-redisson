@@ -9,17 +9,13 @@ import org.redisson.client.protocol.RedisCommand;
 import org.redisson.connection.ConnectionManager;
 import org.redisson.connection.NodeSource;
 import org.redisson.liveobject.core.RedissonObjectBuilder;
-import org.redisson.misc.RedissonPromise;
 
-import com.newrelic.api.agent.DatastoreParameters;
 import com.newrelic.api.agent.NewRelic;
-import com.newrelic.api.agent.Segment;
 import com.newrelic.api.agent.Trace;
 import com.newrelic.api.agent.weaver.MatchType;
 import com.newrelic.api.agent.weaver.NewField;
 import com.newrelic.api.agent.weaver.Weave;
 import com.newrelic.api.agent.weaver.Weaver;
-import com.nr.instrumentation.redisson.NRBiConsumer;
 import com.nr.instrumentation.redisson.Utils;
 
 @Weave(type=MatchType.BaseClass)
@@ -51,26 +47,16 @@ public abstract class CommandAsyncService implements CommandAsyncExecutor {
 			cmdName = "UnknownCommandName";
 		}
 
-		String subName = command.getSubName();
-		
-		String oName = Utils.getObjectName();
+		if(!Utils.typeSet()) {
+			if(objectType != null) {
+				Utils.setType(objectType);
+			} else {
+				Utils.setType("?");
+			}
+		}
 
 		RFuture<R> mainPromise = Weaver.callOriginal();
-
-		if(mainPromise instanceof RedissonPromise) {
-			
-			String collectionName = Utils.typeSet() ? Utils.getType() : objectType != null ? objectType : "?";
-			Segment segment = NewRelic.getAgent().getTransaction().startSegment(cmdName + "-" + collectionName);
-			segment.addCustomAttribute("Command", cmdName);
-			if(subName != null) {
-				segment.addCustomAttribute("Sub", subName);
-			}
-			if(oName != null && !oName.isEmpty()) segment.addCustomAttribute("Redisson Object Name", oName);
-			DatastoreParameters dsParams = DatastoreParameters.product("Redisson").collection(collectionName).operation(cmdName).build();
-			RedissonPromise<R> promise = (RedissonPromise<R>)mainPromise;
-			NRBiConsumer<R> listener = new NRBiConsumer<R>(segment, dsParams);
-			promise.onComplete(listener);
-		}
+		
 		Utils.unSetOperation();
 		Utils.unSetType();
 		Utils.unSetObjectName();
