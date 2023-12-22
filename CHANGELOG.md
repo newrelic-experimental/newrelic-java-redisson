@@ -1,3 +1,7 @@
+## Version: [v2.1.3](https://github.com/newrelic-experimental/newrelic-java-redisson/releases/tag/v2.1.3) | Created: 2023-12-22
+### Bug Fixes
+- Ixes due to switch to CompletableFutures
+
 ## Version: [v2.1.2](https://github.com/newrelic-experimental/newrelic-java-redisson/releases/tag/v2.1.2) | Created: 2023-12-21
 ### Bug Fixes
 - Ixes to work with Reddison v3.25
