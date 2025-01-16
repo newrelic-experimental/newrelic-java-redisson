@@ -1,3 +1,7 @@
+## Version: [v2.1.4](https://github.com/newrelic-experimental/newrelic-java-redisson/releases/tag/v2.1.4) | Created: 2025-01-16
+### Bug Fixes
+- Added OpenSourceBot Token
+
 ## Version: [v2.1.3](https://github.com/newrelic-experimental/newrelic-java-redisson/releases/tag/v2.1.3) | Created: 2023-12-22
 ### Bug Fixes
 - Ixes due to switch to CompletableFutures
