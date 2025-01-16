@@ -9,7 +9,7 @@ import org.redisson.api.RSetMultimapCache;
 import com.newrelic.api.agent.weaver.MatchType;
 import com.newrelic.api.agent.weaver.Weave;
 import com.newrelic.api.agent.weaver.Weaver;
-import com.nr.instrumentation.redisson.Utils;
+import com.newrelic.instrumentation.labs.redisson.Utils;
 
 @Weave(type=MatchType.BaseClass)
 public abstract class RedissonSetMultimapCache<K, V> implements RSetMultimapCache<K, V> {

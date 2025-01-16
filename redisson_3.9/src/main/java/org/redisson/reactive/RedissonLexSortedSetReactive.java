@@ -4,7 +4,7 @@ import org.reactivestreams.Publisher;
 
 import com.newrelic.api.agent.weaver.Weave;
 import com.newrelic.api.agent.weaver.Weaver;
-import com.nr.instrumentation.redisson.Utils;
+import com.newrelic.instrumentation.labs.redisson.Utils;
 
 @Weave
 public abstract class RedissonLexSortedSetReactive {
