@@ -4,7 +4,7 @@
 apply plugin: 'java'
 
 dependencies {
-    implementation 'org.redisson:redisson:3.51.0'
+    implementation 'org.redisson:redisson:4.0.0'
 
    testImplementation 'junit:junit:4.12'
    testImplementation fileTree(include: ['*.jar'], dir: '../test-lib')
@@ -21,7 +21,7 @@ dependencies {
 
 jar {
   manifest {
-    attributes 'Implementation-Title': 'com.newrelic.instrumentation.labs.redisson_3.51'
+    attributes 'Implementation-Title': 'com.newrelic.instrumentation.labs.redisson_4.0.0'
     attributes 'Implementation-Vendor': 'New Relic Labs'
     attributes 'Implementation-Vendor-Id': 'com.newrelic.labs'
     attributes 'Implementation-Version': 1.0
@@ -29,6 +29,6 @@ jar {
 }
 
 verifyInstrumentation {
-   passes 'org.redisson:redisson:[3.51.0,4.0.0)'
+   passes 'org.redisson:redisson:[4.0.0,)'
     excludeRegex '.*-NR.*'
 }
