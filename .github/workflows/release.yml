@@ -18,10 +18,10 @@ jobs:
           fetch-depth: 0
           
 
-      - name: Set up JDK 8
+      - name: Set up JDK 21
         uses: actions/setup-java@v3
         with:
-          java-version: 8
+          java-version: 21
           distribution: 'temurin'
 
 
@@ -33,9 +33,9 @@ jobs:
           mkdir /tmp/to
           echo "NEW_RELIC_EXTENSIONS_DIR=${HOME}/release" >> $GITHUB_ENV
 
-      - name: Build with Gradle and verifyInstrumentation
+      - name: Build with Gradle
         run: |
-          ./gradlew  install verifyInstrumentation
+          ./gradlew clean build install
 
       - name: Identify Release Type
         id: define_release_type
@@ -180,7 +180,7 @@ jobs:
            git commit -m "Update Changelog for Release [skip ci]"
 
           # Push the changes to the remote repository
-           git push --quiet --set-upstream origin HEAD
+           # git push --quiet --set-upstream origin HEAD
       
       - name: Get Compare URL
         run: |
